@@ -50,3 +50,63 @@ var trivia = [{
     choices: ["There is a lot of it and it is easy to get to.", "Many people don't have access to other energy resources.", "It is easy to replant and grow new biomass resources.", "It keeps lumberjacks employed."],
     answer: "Many people don't have access to other energy resources."
 }];
+
+// Main game variable that holds scores, timing, and changes the question
+
+var game = {
+    correct: 0,
+    incorrect: 0,
+    skipped: 0,
+    timer: 20,
+    timerOn: false,
+    timerCount:"",
+    questions: trivia,
+    currentQuestion: 0,
+
+}
+
+//function to display and loop trivia questions
+
+function firstQuestion(){
+    setInterval(game.timer, 1000);
+    $("#question").text(trivia[game.currentQuestion].question);
+    for (var i = 0; i < trivia[game.currentQuestion].choices.length; i++){
+        $("#choices").append("<button class='choices-btns' id='button-"+i+"' data-name='"+trivia[game.currentQuestion].choices[i]+"' >" + trivia[game.currentQuestion].choices[i] + "</button>");
+    }
+};
+
+
+
+//function to check answer after click
+
+function userGuess (e){
+    clearInterval(timer);
+    if($(e.target).data("name")===trivia[game.currentQuestion].answer){
+        console.log("correct");
+    } else {
+        console.log("wrong");
+    }
+};
+
+$(document).on("click", ".choices-btns", function(e){
+    userGuess(e); //see what this means
+})
+
+//function to remove start button after it is pressed and reset game
+
+$("#start").on("click", function(){
+    $("#start").remove();
+
+    game.correct = 0;
+    game.incorrect = 0;
+    game.skipped = 0;
+    
+    clearInterval(game.timerCount);
+
+    $("#triviaGame").show();
+    $("#timer").text(game.timer);
+    $("countDown").show();
+
+    firstQuestion();
+
+})

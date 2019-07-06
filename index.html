@@ -10,9 +10,30 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Questions and answers sourced from https://www.proprofs.com/quiz-school/topic/renewable-energy -->
-    <title>Renweable Energy Trivia</title>
+    <title>Renewable Energy Trivia</title>
 </head>
 <body>
+
+    <div class="containter">
+        <div class="jumbotron p-3 m-2 text-center">
+            <h1 class="display-4">Renewable Energy Trivia!</h1>
+            <br>
+            <button class="btn btn-primary" id="start">Start</button>
+    </div>
+
+    <br><br>
+
+    <div class="container">
+        <div class="row text-center">
+
+            <div class="col" id="triviaGame">
+                <p id="countDown">Time Left: <span id="timer"></span></p>
+                <p id="question"></p>
+                <p id="choices"></p>
+            </div>
+        
+        </div>
+    </div>
 
 
         <script type="text/javascript" src="assets/javascript/app.js"></script>
