@@ -55,7 +55,7 @@ var game = {
     correct: 0,
     incorrect: 0,
     skipped: 0,
-    timer: 5,
+    timer: 10,
     questions: trivia,
     currentQuestion: 0,
 };
@@ -87,12 +87,12 @@ function newQuestion(){
 
 //function to display next question
 function nextQuestion() {
-    game.timer = 5;
+    game.timer = 10;
     $("#timer").text("Seconds Left: " + game.timer);
     game.currentQuestion++;
     $("#choices").text("");
     newQuestion();
-}
+};
 
 //function to check answer after click
 function userGuess (e){
@@ -142,9 +142,9 @@ function outOfTime () {
     console.log("Out of time");
     game.skipped++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 3000);
+        setTimeout(finalScore, 4000);
     } else {
-        setTimeout(nextQuestion, 3000);
+        setTimeout(nextQuestion, 4000);
     }
 };
 
@@ -156,15 +156,17 @@ function finalScore (){
     $("#triviaGame").append("Correct Answers: " + game.correct);
     $("#triviaGame").append("Incorrect Answers: " + game.incorrect);
     $("#triviaGame").append("Skipped Answers: " + game.skipped);
+    $("#start").show();
 };
 
 //function to remove start button after it is pressed and reset game
 $("#start").on("click", function(){
-    $("#start").remove();
+    $("#start").hide();
 
     game.correct = 0;
     game.incorrect = 0;
     game.skipped = 0;
+    game.currentQuestion = 0;
     
     clearInterval(game.timerCount);
 
@@ -172,4 +174,5 @@ $("#start").on("click", function(){
 
     newQuestion();
 
-})
+});
+
