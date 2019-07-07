@@ -63,9 +63,11 @@ var game = {
 // function to count down
 function countDown(){
     game.timer--;
-    $("#timer").text("Seconds Left: " + game.timer);
+    $("#timer").html("<strong>Seconds Left: " + game.timer + "</strong>");
     if(game.timer === 0){
         outOfTime();
+    } else if (game.timer <= 5){
+        $("#timer").css("color", "red");
     }
 };
 
@@ -88,7 +90,8 @@ function newQuestion(){
 //function to display next question
 function nextQuestion() {
     game.timer = 10;
-    $("#timer").text("Seconds Left: " + game.timer);
+    $("#timer").html("<strong>Seconds Left: " + game.timer + "</strong>");
+    $("#timer").css("color", "black");
     game.currentQuestion++;
     $("#choices").text("");
     $("#question").text("");
@@ -112,7 +115,7 @@ function userGuess (e){
 //function for correct answer
 function correctGuess (){
     clearInterval(timerSet);
-    $("#question").append("<h4>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h4>");
+    $("#choices").append("<br><h3 class='answer'>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
     console.log("correct");
     game.correct++;
     if (game.currentQuestion === trivia.length - 1){
@@ -125,7 +128,7 @@ function correctGuess (){
 //function for incorrect answer
 function incorrectGuess (){
     clearInterval(timerSet);
-    $("#question").append("<h2>Wrong! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
+    $("#choices").append("<br><h3 class='answer'>Wrong! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
     console.log("incorrect");
     game.incorrect++;
     if (game.currentQuestion === trivia.length - 1){
@@ -139,7 +142,7 @@ function incorrectGuess (){
 function outOfTime () {
     $(document).off("click", ".choices-btns");
     clearInterval(timerSet);
-    $("#question").append("<h2>Out of time! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
+    $("#choices").append("<br><h3 class='answer'>Out of time! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
     console.log("Out of time");
     game.skipped++;
     if (game.currentQuestion === trivia.length - 1){
@@ -153,16 +156,18 @@ function outOfTime () {
 //function to show final score
 function finalScore (){
     clearInterval(timerSet);
-    $("#triviaGame").text("See your results!");
-    $("#triviaGame").append("Correct Answers: " + game.correct);
-    $("#triviaGame").append("Incorrect Answers: " + game.incorrect);
-    $("#triviaGame").append("Skipped Answers: " + game.skipped);
+    $("#triviaGame").text("");
+    $("#triviaGame").append("<h1><strong><u>Results:</u></strong></h1><br>");
+    $("#triviaGame").append("<h2>Correct Answers: " + game.correct + "</h2>");
+    $("#triviaGame").append("<h2>Incorrect Answers: " + game.incorrect + "</h2>");
+    $("#triviaGame").append("<h2>Skipped Answers: " + game.skipped + "</h2>");
     $("#start").show();
 };
 
 //function to remove start button after it is pressed and reset game
 $("#start").on("click", function(){
     $("#start").hide();
+    $(".jumbotron").hide();
 
     $("#triviaGame").text("");
     $("#triviaGame").append("<p id='countDown'><span id='timer'></span></p>");
@@ -177,7 +182,7 @@ $("#start").on("click", function(){
     
     clearInterval(game.timer);
 
-    $("#timer").text("Seconds Left: " + game.timer);
+    $("#timer").html("<strong>Seconds Left: " + game.timer + "</strong>");
 
     newQuestion();
 

@@ -1,0 +1,11 @@
+body {
+    background: url(../../assets/images/The-environmental-impacts-of-solar-and-wind-energy.jpg);
+    background-position: 50% 20%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.answer {
+    background-color: aliceblue;
+    opacity: 0.5;
+}
