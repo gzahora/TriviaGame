@@ -74,7 +74,7 @@ function newQuestion(){
     timerSet = setInterval(countDown, 1000);
     $("#question").text(trivia[game.currentQuestion].question);
     for (var i = 0; i < trivia[game.currentQuestion].choices.length; i++){
-        $("#choices").append("<button class='choices-btns' id='button-"+i+"' data-name='"+trivia[game.currentQuestion].choices[i]+"' >" + trivia[game.currentQuestion].choices[i] + "</button>");
+        $("#choices").append("<button class='choices-btns btn btn-info btn-lg m-3' id='button-"+i+"' data-name='"+trivia[game.currentQuestion].choices[i]+"' >" + trivia[game.currentQuestion].choices[i] + "</button>");
     }
 };
 
