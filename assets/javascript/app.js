@@ -71,6 +71,13 @@ function countDown(){
 
 //function to display first question
 function newQuestion(){
+    $(document).on("click", ".choices-btns", function(e){
+        if (game.timer > 0) {
+            userGuess(e); 
+        } else if (game.timer <= 0) {
+            outOfTime();
+        }    
+    });
     timerSet = setInterval(countDown, 1000);
     $("#question").text(trivia[game.currentQuestion].question);
     for (var i = 0; i < trivia[game.currentQuestion].choices.length; i++){
@@ -87,16 +94,16 @@ function nextQuestion() {
     newQuestion();
 }
 
-//event listener to see if the user's guess (from clicking the button) matches the answer stored in the button
-$(document).on("click", ".choices-btns", function(e){
-    userGuess(e);
-});
-
 //function to check answer after click
 function userGuess (e){
+    $(document).off("click", ".choices-btns");
     if($(e.target).data("name")===trivia[game.currentQuestion].answer){
+        $(e.target).addClass("btn-success").removeClass("btn-info");
         correctGuess();
+    } else if (game.timer === 0){
+        outOfTime();   
     } else {
+        $(e.target).addClass("btn-danger").removeClass("btn-info");
         incorrectGuess();
     }
 };
@@ -104,38 +111,43 @@ function userGuess (e){
 //function for correct answer
 function correctGuess (){
     clearInterval(timerSet);
+    $("#question").append("<h2>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
     console.log("correct");
     game.correct++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 1000);
+        setTimeout(finalScore, 4000);
     } else {
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 4000);
     }
 };
 
 //function for incorrect answer
 function incorrectGuess (){
     clearInterval(timerSet);
+    $("#question").append("<h2>Wrong! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
     console.log("incorrect");
     game.incorrect++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 1000); //still need results function
+        setTimeout(finalScore, 4000);
     } else {
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 4000);
     }
 };
 
 //function for letting the timer run out
 function outOfTime () {
+    $(document).off("click", ".choices-btns");
     clearInterval(timerSet);
+    $("#question").append("<h2>Out of time! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
     console.log("Out of time");
     game.skipped++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 1000); //still need results function
+        setTimeout(finalScore, 3000);
     } else {
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 3000);
     }
 };
+
 
 //function to show final score
 function finalScore (){
@@ -156,7 +168,6 @@ $("#start").on("click", function(){
     
     clearInterval(game.timerCount);
 
-    $("#triviaGame").show();
     $("#timer").text("Seconds Left: " + game.timer);
 
     newQuestion();
