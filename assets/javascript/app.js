@@ -46,8 +46,8 @@ var trivia = [{
 },
 {
     question: "Why is biomass still an important energy resource today?",
-    choices: ["There is a lot of it and it is easy to get to.", "Many people don't have access to other energy resources.", "It is easy to replant and grow new biomass resources.", "It keeps lumberjacks employed."],
-    answer: "Many people don't have access to other energy resources."
+    choices: ["Many people do not have access to other energy resources", "There is a lot of it and it is easy to get to.", "It is easy to replant and grow new biomass resources.", "It keeps lumberjacks employed."],
+    answer: "Many people do not have access to other energy resources"
 }];
 
 // Main game variable that holds scores, timing, and changes the question
@@ -79,7 +79,7 @@ function newQuestion(){
         }    
     });
     timerSet = setInterval(countDown, 1000);
-    $("#question").text(trivia[game.currentQuestion].question);
+    $("#question").append("<h3>" + trivia[game.currentQuestion].question + "</h3>");
     for (var i = 0; i < trivia[game.currentQuestion].choices.length; i++){
         $("#choices").append("<button class='choices-btns btn btn-info btn-lg m-3' id='button-"+i+"' data-name='"+trivia[game.currentQuestion].choices[i]+"' >" + trivia[game.currentQuestion].choices[i] + "</button>");
     }
@@ -91,6 +91,7 @@ function nextQuestion() {
     $("#timer").text("Seconds Left: " + game.timer);
     game.currentQuestion++;
     $("#choices").text("");
+    $("#question").text("");
     newQuestion();
 };
 
@@ -111,13 +112,13 @@ function userGuess (e){
 //function for correct answer
 function correctGuess (){
     clearInterval(timerSet);
-    $("#question").append("<h2>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
+    $("#question").append("<h4>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h4>");
     console.log("correct");
     game.correct++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 4000);
+        setTimeout(finalScore, 3000);
     } else {
-        setTimeout(nextQuestion, 4000);
+        setTimeout(nextQuestion, 3000);
     }
 };
 
@@ -128,9 +129,9 @@ function incorrectGuess (){
     console.log("incorrect");
     game.incorrect++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 4000);
+        setTimeout(finalScore, 3000);
     } else {
-        setTimeout(nextQuestion, 4000);
+        setTimeout(nextQuestion, 3000);
     }
 };
 
@@ -142,9 +143,9 @@ function outOfTime () {
     console.log("Out of time");
     game.skipped++;
     if (game.currentQuestion === trivia.length - 1){
-        setTimeout(finalScore, 4000);
+        setTimeout(finalScore, 3000);
     } else {
-        setTimeout(nextQuestion, 4000);
+        setTimeout(nextQuestion, 3000);
     }
 };
 
@@ -152,7 +153,7 @@ function outOfTime () {
 //function to show final score
 function finalScore (){
     clearInterval(timerSet);
-    $("#triviaGame").html("See your results!");
+    $("#triviaGame").text("See your results!");
     $("#triviaGame").append("Correct Answers: " + game.correct);
     $("#triviaGame").append("Incorrect Answers: " + game.incorrect);
     $("#triviaGame").append("Skipped Answers: " + game.skipped);
@@ -163,12 +164,18 @@ function finalScore (){
 $("#start").on("click", function(){
     $("#start").hide();
 
+    $("#triviaGame").text("");
+    $("#triviaGame").append("<p id='countDown'><span id='timer'></span></p>");
+    $("#triviaGame").append("<p id='question'></p>");
+    $("#triviaGame").append("<div id='choices'></div>");
+
     game.correct = 0;
     game.incorrect = 0;
     game.skipped = 0;
     game.currentQuestion = 0;
+    game.timer = 10;
     
-    clearInterval(game.timerCount);
+    clearInterval(game.timer);
 
     $("#timer").text("Seconds Left: " + game.timer);
 
