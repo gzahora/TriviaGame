@@ -7,7 +7,7 @@ var trivia = [{
 {
     question: "Which sector produces the most CO2?",
     choices: ["Transportation", "Manufacturing and Construction", "Electricity and Heat Production", "Residences"],
-    answer: "Electricity and Heat Production"/*
+    answer: "Electricity and Heat Production"
 },
 {
     question: "Coal, oil, natural gas, and propane are fossil fuels. They are called fossil fuels because: ",
@@ -47,7 +47,7 @@ var trivia = [{
 {
     question: "Why is biomass still an important energy resource today?",
     choices: ["Many people do not have access to other energy resources", "There is a lot of it and it is easy to get to.", "It is easy to replant and grow new biomass resources.", "It keeps lumberjacks employed."],
-    answer: "Many people do not have access to other energy resources"*/
+    answer: "Many people do not have access to other energy resources"
 }];
 
 // Main game variable that holds scores, timing, and changes the question
@@ -115,7 +115,7 @@ function userGuess (e){
 //function for correct answer
 function correctGuess (){
     clearInterval(timerSet);
-    $("#choices").append("<br><h3 class='answer'>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
+    $("#choices").append("<br><br><h3 class='answer'>Correct! The answer was: " + trivia[game.currentQuestion].answer + "</h3><br>");
     console.log("correct");
     game.correct++;
     if (game.currentQuestion === trivia.length - 1){
@@ -128,7 +128,7 @@ function correctGuess (){
 //function for incorrect answer
 function incorrectGuess (){
     clearInterval(timerSet);
-    $("#choices").append("<br><h3 class='answer'>Wrong! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
+    $("#choices").append("<br><br><h3 class='answer'>Wrong! The answer was: " + trivia[game.currentQuestion].answer + "</h3><br>");
     console.log("incorrect");
     game.incorrect++;
     if (game.currentQuestion === trivia.length - 1){
@@ -142,7 +142,7 @@ function incorrectGuess (){
 function outOfTime () {
     $(document).off("click", ".choices-btns");
     clearInterval(timerSet);
-    $("#choices").append("<br><h3 class='answer'>Out of time! The answer was: " + trivia[game.currentQuestion].answer + "</h3>");
+    $("#choices").append("<br><br><h3 class='answer'>Out of time! The answer was: " + trivia[game.currentQuestion].answer + "</h3><br>");
     console.log("Out of time");
     game.skipped++;
     if (game.currentQuestion === trivia.length - 1){
@@ -157,10 +157,10 @@ function outOfTime () {
 function finalScore (){
     clearInterval(timerSet);
     $("#triviaGame").text("");
-    $("#triviaGame").append("<h1><strong><u>Results:</u></strong></h1><br>");
+    $("#triviaGame").append("<br><h1><strong><u>Results:</u></strong></h1><br>");
     $("#triviaGame").append("<h2>Correct Answers: " + game.correct + "</h2>");
     $("#triviaGame").append("<h2>Incorrect Answers: " + game.incorrect + "</h2>");
-    $("#triviaGame").append("<h2>Skipped Answers: " + game.skipped + "</h2>");
+    $("#triviaGame").append("<h2>Skipped Answers: " + game.skipped + "</h2><br><br>");
     $(".jumbotron").show();
     $("#start").show();
 };

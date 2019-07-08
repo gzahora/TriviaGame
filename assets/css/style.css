@@ -3,9 +3,9 @@ body {
     background-position: 50% 20%;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
 
-.answer {
-    background-color: aliceblue;
-    opacity: 0.5;
+.container {
+    background: rgb(230, 255, 230, .6);
 }
