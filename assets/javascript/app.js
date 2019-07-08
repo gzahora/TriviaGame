@@ -7,7 +7,7 @@ var trivia = [{
 {
     question: "Which sector produces the most CO2?",
     choices: ["Transportation", "Manufacturing and Construction", "Electricity and Heat Production", "Residences"],
-    answer: "Electricity and Heat Production"
+    answer: "Electricity and Heat Production"/*
 },
 {
     question: "Coal, oil, natural gas, and propane are fossil fuels. They are called fossil fuels because: ",
@@ -47,7 +47,7 @@ var trivia = [{
 {
     question: "Why is biomass still an important energy resource today?",
     choices: ["Many people do not have access to other energy resources", "There is a lot of it and it is easy to get to.", "It is easy to replant and grow new biomass resources.", "It keeps lumberjacks employed."],
-    answer: "Many people do not have access to other energy resources"
+    answer: "Many people do not have access to other energy resources"*/
 }];
 
 // Main game variable that holds scores, timing, and changes the question
@@ -161,6 +161,7 @@ function finalScore (){
     $("#triviaGame").append("<h2>Correct Answers: " + game.correct + "</h2>");
     $("#triviaGame").append("<h2>Incorrect Answers: " + game.incorrect + "</h2>");
     $("#triviaGame").append("<h2>Skipped Answers: " + game.skipped + "</h2>");
+    $(".jumbotron").show();
     $("#start").show();
 };
 
