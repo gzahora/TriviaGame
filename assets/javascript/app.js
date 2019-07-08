@@ -160,7 +160,7 @@ function finalScore (){
     $("#triviaGame").append("<br><h1><strong><u>Results:</u></strong></h1><br>");
     $("#triviaGame").append("<h2>Correct Answers: " + game.correct + "</h2>");
     $("#triviaGame").append("<h2>Incorrect Answers: " + game.incorrect + "</h2>");
-    $("#triviaGame").append("<h2>Skipped Answers: " + game.skipped + "</h2><br><br>");
+    $("#triviaGame").append("<h2>Skipped Answers: " + game.skipped + "</h2><br>");
     $(".jumbotron").show();
     $("#start").show();
 };
