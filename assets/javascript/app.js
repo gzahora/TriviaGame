@@ -55,7 +55,7 @@ var game = {
     correct: 0,
     incorrect: 0,
     skipped: 0,
-    timer: 10,
+    timer: 20,
     questions: trivia,
     currentQuestion: 0,
 };
@@ -66,7 +66,7 @@ function countDown(){
     $("#timer").html("<strong>Seconds Left: " + game.timer + "</strong>");
     if(game.timer === 0){
         outOfTime();
-    } else if (game.timer <= 5){
+    } else if (game.timer <= 8){
         $("#timer").css("color", "red");
     }
 };
@@ -89,7 +89,7 @@ function newQuestion(){
 
 //function to display next question
 function nextQuestion() {
-    game.timer = 10;
+    game.timer = 20;
     $("#timer").html("<strong>Seconds Left: " + game.timer + "</strong>");
     $("#timer").css("color", "black");
     game.currentQuestion++;
@@ -179,7 +179,7 @@ $("#start").on("click", function(){
     game.incorrect = 0;
     game.skipped = 0;
     game.currentQuestion = 0;
-    game.timer = 10;
+    game.timer = 20;
     
     clearInterval(game.timer);
 
