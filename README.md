@@ -1,6 +1,6 @@
 # TriviaGame
 
-This game test your knowledge of the renewable energy industry. There are 10 questions and you have the option to start them game again to see if you can improve your score. It was created using a combination of html, javascript, bootstrap, and some light css.
+This game test your knowledge of the renewable energy industry. There are 20 questions and you have the option to start them game again to see if you can improve your score. It was created using a combination of html, javascript, bootstrap, and some light css.
 
 
 ## Getting Started
